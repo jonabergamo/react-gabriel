@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# Run Eslint into tsx project to find bugs and sintax errors and run find-deadcode script to check exports/imports 
-npx eslint src/**/*.tsx

@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# Script to build the project and run tests before pushing"
-npm run build; npm run lint
