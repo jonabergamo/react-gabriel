@@ -27,6 +27,11 @@
   color:var(--background)
 }
 
+.icon svg {
+  color: var(--background);
+  width: 20px
+}
+
 .icon--moon {
   transition-delay: 200ms;
 }

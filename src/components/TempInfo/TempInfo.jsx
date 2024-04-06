@@ -2,6 +2,10 @@
 import React from 'react';
 import './style.css';
 
+function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
+}
+
 export default function TempInfo({ data }) {
   // Função para converter o timestamp Unix para hora legível
   const formatTime = (timestamp) => {
@@ -15,6 +19,7 @@ export default function TempInfo({ data }) {
         <div>
           <h1>{data.name}</h1>
           <h2>{(data.main.temp - 273.15).toFixed(2)} °C</h2>
+          <h3>{capitalizeFirstLetter(data.weather[0].description)}</h3>
         </div>
         <img
           src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
@@ -25,27 +30,9 @@ export default function TempInfo({ data }) {
       <div className='details'>
         <div className="item-column">
           <div className='item'>
-            <div className='icon'>
-              <svg xmlSpace="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" className="humiditysvg">  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                  AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
-                  e7ZQfLZVf6pRfbfL5fdRfbZIbbZmmcxols5nl85OebSPsteLrdVSfLZxl89ok9FqlM5ahsBdicNa
-                  hsFcicRhjcdWgbpahsFfi8ZbhsFijsmErOWLt+9xndZcicJahsFahsFdicN5n81xjcZqlNRpls1q
-                  lNBfn99pls9nkcxXgrpZgrtik81OebWNsdeMrtZOebRNerVZg7pwmMhNebRKdLRNerZNebHZ8v9o
-                  lM9jj8rV7v3W7v1ch7+Ktu6Lt/CEsep7p+Cz1PO+3fqJte5/q+V+quOUvvLY8f+TvfKpzvapzfaq
-                  z/aRvPGdxfSVv/LX8P/W8P+32fnK5vyMuPCmzPXW8P6ny/WWv/KOufGawvO22PjJ5vzB4PrU7v6i
-                  yPSz1fiYwfKOufDD4funzPXF4vvE4vuOuvHV7/7U7/7G4/uNufCx1Pew0/ev0veu0feQu/G01viP
-                  ufF/q+SCrud+quSItO2kyvWjyfVijslrltFmkcyEqtZgjMf///8NXQssAAAAPHRSTlMAAZgCW+EG
-                  y+jMBxRaRXHC2H8bX0ry/vrhyvnw0PDHR0Be/e/4/f4SDDNiEFVb0eI5iMHCho7NwI0YOBdy59Cm
-                  AAAAAWJLR0SCi7P/RAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+cCEBITAJMBs+kAAAFb
-                  SURBVCjPY2CAAUYmZgY8gIWVBY8sGzsHJxc2CW4eXiDJx28jIAjiCgnzgoV5ebiBpIiomK2duISk
-                  lL2Ng6O0jIwsmCsnIW5nKyYqwiDv5AwELq5uNjY27h6enh5grpcLiHKSZ1BwBgNvH6C0j68zKlCA
-                  SfvZgIA/LukAsHQAVDgwCE06OAQoGxoMlQ4Lj0CVdo6MsomKhrJjfGwi0aSdY+NiYcx4G5sEdGkk
-                  kGhjk4RHOjnEJgWPtLNvKprL07CpgktHpEfgk/a3ycAnnWmThRDMxpDOscmFi6Xl5aNLF+QUwqWL
-                  bIoxogQBSpJskkpwS5cC4yYFp3RZElA6qQwh7VFeAWZXVFYByWpwxNcAueUeQGlFJWUZCZXauloV
-                  CRllVdt6NbB0QyOIq6TIoK4BSrWaWpogSltHVw8srW8A4mqoY6R6QyOgrLEJztxiamZuZsGGOztZ
-                  WlnD2QBCYbJl9Cx9XAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xNlQxODoxOTowMCswMDow
-                  MG/wqfUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDItMTZUMTg6MTk6MDArMDA6MDAerRFJAAAA
-                  KHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAyLTE2VDE4OjE5OjAwKzAwOjAwSbgwlgAAAABJRU5ErkJggg==" y={0} x={0} height={30} width={30} id="image0" />
+            <div className='info-icon'>
+              <svg viewBox="0 0 60 60" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.4365 3.7207C10.1074 3.7207 8.68652 4.96582 7.66113 5.94727C6.63574 6.94336 5.85937 7.9834 5.12695 8.93554C4.40918 9.87304 3.73535 10.6934 3.31055 11.1035C2.88574 11.5283 2.85645 11.2207 3.73535 11.2207C1.68457 11.2207 0 12.9053 0 14.9561C0 15.9521 0.395509 16.9043 1.09863 17.6074C1.80176 18.3105 2.75391 18.7061 3.73535 18.7061C6.0791 18.7061 7.5 17.4756 8.51074 16.4795C9.53613 15.4834 10.3271 14.4434 11.0449 13.5059C11.6016 12.7881 12.0264 12.29 12.4365 11.8359C12.8467 12.29 13.2715 12.7881 13.8281 13.5059C14.5459 14.4434 15.3369 15.498 16.3477 16.4795C17.373 17.4756 18.7939 18.7061 21.1377 18.7061C23.4814 18.7207 24.8877 17.4756 25.9131 16.4795C26.9385 15.498 27.7295 14.4434 28.4473 13.5059C29.0039 12.7881 29.4287 12.29 29.8389 11.8359C30.249 12.29 30.6738 12.8027 31.2158 13.5059C31.9482 14.458 32.7246 15.498 33.75 16.4941C34.7754 17.4902 36.1963 18.7207 38.5254 18.7207C40.8691 18.7207 42.29 17.4902 43.3008 16.4941C44.3262 15.498 45.1172 14.458 45.835 13.5205C46.3916 12.8027 46.8164 12.3047 47.2266 11.8506C47.6367 12.3047 48.0615 12.8027 48.6182 13.5205C49.3359 14.458 50.127 15.5127 51.1523 16.4941C52.1777 17.4902 53.584 18.7207 55.9277 18.7207C57.9932 18.7354 59.6631 17.0508 59.6631 14.9854C59.6631 13.1836 58.374 11.6309 56.5869 11.3086C56.543 11.2793 56.4697 11.2354 56.3672 11.1328C55.9277 10.7227 55.2539 9.88769 54.5361 8.95019C53.8184 8.01269 53.0273 6.95801 52.0166 5.96191C50.9912 4.98047 49.5703 3.75 47.2412 3.73535C44.8975 3.73535 43.4766 4.98047 42.4512 5.96191C41.4258 6.95801 40.6494 7.99804 39.9316 8.93554C39.375 9.65332 38.9355 10.1514 38.54 10.6055C38.1299 10.1514 37.6904 9.65332 37.1484 8.93554C36.416 7.99804 35.6396 6.95801 34.6143 5.96191C33.5889 4.96582 32.1826 3.73535 29.8389 3.73535C27.4951 3.73535 26.0742 4.96582 25.0635 5.96191C24.0381 6.95801 23.2471 7.99804 22.5293 8.93554C21.9727 9.65332 21.5479 10.1514 21.1377 10.5908C20.7275 10.1514 20.3027 9.65332 19.7461 8.93554C19.0283 7.99804 18.2373 6.94336 17.2266 5.94727C16.2012 4.96582 14.7803 3.73535 12.4512 3.7207H12.4365ZM12.4365 22.4854C10.1074 22.4854 8.68652 23.7158 7.66113 24.7119C6.63574 25.708 5.85937 26.748 5.12695 27.6855C4.40918 28.623 3.73535 29.458 3.31055 29.8682C2.88574 30.2783 2.85645 29.9854 3.73535 29.9854C1.68457 29.9854 0 31.6553 0 33.7207C0 34.7168 0.395509 35.6689 1.09863 36.3721C1.80176 37.0752 2.75391 37.4707 3.73535 37.4561C6.0791 37.4707 7.5 36.2256 8.51074 35.2295C9.53613 34.248 10.3271 33.1934 11.0449 32.2559C11.6016 31.5527 12.0264 31.0547 12.4365 30.6006C12.8467 31.0547 13.2715 31.5527 13.8281 32.2559C14.5459 33.208 15.3369 34.248 16.3477 35.2441C17.373 36.2402 18.7939 37.4707 21.1377 37.4707C23.4814 37.4707 24.8877 36.2402 25.9131 35.2441C26.9385 34.248 27.7295 33.208 28.4473 32.2705C29.0039 31.5527 29.4287 31.0547 29.8389 30.6006C30.249 31.0547 30.6738 31.5527 31.2158 32.2705C31.9482 33.208 32.7246 34.2627 33.75 35.2441C34.7754 36.2402 36.1963 37.4707 38.5254 37.4707C40.8691 37.4854 42.29 36.2402 43.3008 35.2441C44.3262 34.2627 45.1172 33.208 45.835 32.2705C46.3916 31.5674 46.8164 31.0547 47.2266 30.6006C47.6367 31.0547 48.0615 31.5527 48.6182 32.2705C49.3359 33.2227 50.127 34.2627 51.1377 35.2588C52.1631 36.2549 53.584 37.4854 55.9277 37.4854C57.9932 37.4854 59.6631 35.8154 59.6631 33.75C59.6631 31.9336 58.374 30.3955 56.5869 30.0732C56.543 30.0439 56.4697 29.9853 56.3672 29.8975C55.9277 29.4727 55.2539 28.6523 54.5361 27.7148C53.8184 26.7627 53.0273 25.7227 52.0166 24.7266C50.9912 23.7305 49.5703 22.5 47.2412 22.5C44.8975 22.5 43.4766 23.7305 42.4512 24.7266C41.4258 25.7227 40.6494 26.7627 39.9316 27.7002C39.375 28.418 38.9355 28.916 38.54 29.3701C38.1299 28.916 37.6904 28.418 37.1484 27.7002C36.416 26.7627 35.6396 25.708 34.6143 24.7266C33.5889 23.7305 32.1826 22.5 29.8389 22.5C27.4951 22.4854 26.0742 23.7305 25.0635 24.7266C24.0381 25.708 23.2471 26.7627 22.5293 27.7002C21.9727 28.4033 21.5479 28.9014 21.1377 29.3555C20.7275 28.9014 20.3027 28.4033 19.7461 27.7002C19.0283 26.748 18.2373 25.708 17.2266 24.7119C16.2012 23.7158 14.7803 22.4854 12.4512 22.4854H12.4365ZM12.4365 41.25C10.1074 41.2354 8.68652 42.4805 7.66113 43.4766C6.63574 44.458 5.85937 45.498 5.12695 46.4502C4.40918 47.3877 3.73535 48.208 3.31055 48.6328C2.88574 49.043 2.85645 48.7354 3.73535 48.7354C1.68457 48.7354 0 50.4199 0 52.4707C0 53.4668 0.395509 54.4189 1.09863 55.1221C1.80176 55.8252 2.75391 56.2207 3.73535 56.2207C6.0791 56.2207 7.5 54.9902 8.51074 53.9941C9.53613 52.998 10.3271 51.958 11.0449 51.0205C11.6016 50.3027 12.0264 49.8047 12.4365 49.3506C12.8467 49.8047 13.2715 50.3027 13.8281 51.0205C14.5459 51.958 15.3369 53.0127 16.3477 53.9941C17.373 54.9902 18.7939 56.2207 21.1377 56.2207C23.4814 56.2354 24.8877 54.9902 25.9131 53.9941C26.9385 53.0127 27.7295 51.958 28.4473 51.0205C29.0039 50.3027 29.4287 49.8047 29.8389 49.3506C30.249 49.8047 30.6738 50.3174 31.2158 51.0205C31.9482 51.9727 32.7246 53.0127 33.75 54.0088C34.7754 55.0049 36.1963 56.2354 38.5254 56.2354C40.8691 56.2354 42.29 55.0049 43.3008 54.0088C44.3262 53.0127 45.1172 51.9727 45.835 51.0352C46.3916 50.3174 46.8164 49.8193 47.2266 49.3652C47.6367 49.8193 48.0615 50.3174 48.6182 51.0352C49.3359 51.9727 50.127 53.0273 51.1523 54.0088C52.1777 55.0049 53.584 56.2354 55.9277 56.2354C57.9932 56.25 59.6631 54.5654 59.6631 52.5C59.6631 50.6982 58.374 49.1455 56.5869 48.8232C56.543 48.7939 56.4697 48.75 56.3672 48.6475C55.9277 48.2373 55.2539 47.4023 54.5361 46.4648C53.8184 45.5273 53.0273 44.4873 52.0166 43.4912C50.9912 42.4951 49.5703 41.2646 47.2412 41.25C44.8975 41.25 43.4766 42.4951 42.4512 43.4766C41.4258 44.4727 40.6494 45.5127 39.9316 46.4502C39.375 47.168 38.9355 47.666 38.54 48.1201C38.1299 47.666 37.6904 47.168 37.1484 46.4502C36.416 45.5127 35.6396 44.4727 34.6143 43.4766C33.5889 42.4805 32.1826 41.25 29.8389 41.25C27.4951 41.25 26.0742 42.4805 25.0635 43.4766C24.0381 44.4727 23.2471 45.5127 22.5293 46.4502C21.9727 47.168 21.5479 47.666 21.1377 48.1055C20.7275 47.666 20.3027 47.168 19.7461 46.4502C19.0283 45.5127 18.2373 44.458 17.2266 43.4619C16.2012 42.4805 14.7803 41.25 12.4512 41.2354L12.4365 41.25Z" fill="currentColor" />
               </svg>
             </div>
             <div className="text">
@@ -54,27 +41,10 @@ export default function TempInfo({ data }) {
             </div>
           </div>
           <div className='item'>
-            <div className='icon'>
-              <svg xmlSpace="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" className="humiditysvg">  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                  AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
-                  e7ZQfLZVf6pRfbfL5fdRfbZIbbZmmcxols5nl85OebSPsteLrdVSfLZxl89ok9FqlM5ahsBdicNa
-                  hsFcicRhjcdWgbpahsFfi8ZbhsFijsmErOWLt+9xndZcicJahsFahsFdicN5n81xjcZqlNRpls1q
-                  lNBfn99pls9nkcxXgrpZgrtik81OebWNsdeMrtZOebRNerVZg7pwmMhNebRKdLRNerZNebHZ8v9o
-                  lM9jj8rV7v3W7v1ch7+Ktu6Lt/CEsep7p+Cz1PO+3fqJte5/q+V+quOUvvLY8f+TvfKpzvapzfaq
-                  z/aRvPGdxfSVv/LX8P/W8P+32fnK5vyMuPCmzPXW8P6ny/WWv/KOufGawvO22PjJ5vzB4PrU7v6i
-                  yPSz1fiYwfKOufDD4funzPXF4vvE4vuOuvHV7/7U7/7G4/uNufCx1Pew0/ev0veu0feQu/G01viP
-                  ufF/q+SCrud+quSItO2kyvWjyfVijslrltFmkcyEqtZgjMf///8NXQssAAAAPHRSTlMAAZgCW+EG
-                  y+jMBxRaRXHC2H8bX0ry/vrhyvnw0PDHR0Be/e/4/f4SDDNiEFVb0eI5iMHCho7NwI0YOBdy59Cm
-                  AAAAAWJLR0SCi7P/RAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+cCEBITAJMBs+kAAAFb
-                  SURBVCjPY2CAAUYmZgY8gIWVBY8sGzsHJxc2CW4eXiDJx28jIAjiCgnzgoV5ebiBpIiomK2duISk
-                  lL2Ng6O0jIwsmCsnIW5nKyYqwiDv5AwELq5uNjY27h6enh5grpcLiHKSZ1BwBgNvH6C0j68zKlCA
-                  SfvZgIA/LukAsHQAVDgwCE06OAQoGxoMlQ4Lj0CVdo6MsomKhrJjfGwi0aSdY+NiYcx4G5sEdGkk
-                  kGhjk4RHOjnEJgWPtLNvKprL07CpgktHpEfgk/a3ycAnnWmThRDMxpDOscmFi6Xl5aNLF+QUwqWL
-                  bIoxogQBSpJskkpwS5cC4yYFp3RZElA6qQwh7VFeAWZXVFYByWpwxNcAueUeQGlFJWUZCZXauloV
-                  CRllVdt6NbB0QyOIq6TIoK4BSrWaWpogSltHVw8srW8A4mqoY6R6QyOgrLEJztxiamZuZsGGOztZ
-                  WlnD2QBCYbJl9Cx9XAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xNlQxODoxOTowMCswMDow
-                  MG/wqfUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDItMTZUMTg6MTk6MDArMDA6MDAerRFJAAAA
-                  KHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAyLTE2VDE4OjE5OjAwKzAwOjAwSbgwlgAAAABJRU5ErkJggg==" y={0} x={0} height={30} width={30} id="image0" />
+            <div className='info-icon'>
+              <svg viewBox="0 0 61 61" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.5547 52.6593C12.1699 52.6593 5.34961 45.839 5.34961 37.4542C5.34961 29.6495 17.3496 14.3038 18.7207 12.5812C19.0605 12.1534 19.5703 11.9015 20.1152 11.8956C20.666 11.8898 21.1758 12.1241 21.5273 12.5401C21.6152 12.6456 23.7363 15.1651 26.3437 18.7042C26.9355 19.5128 26.7656 20.6495 25.957 21.2413C25.1484 21.8331 24.0117 21.6632 23.4199 20.8546C22.1719 19.1554 21.0234 17.6905 20.1797 16.63C16.125 22.0206 8.97656 32.5382 8.97656 37.4542C8.97656 43.8351 14.168 49.0323 20.5547 49.0323C26.9414 49.0323 32.1328 43.8351 32.1328 37.4542C32.1328 36.4523 32.9473 35.6378 33.9492 35.6378C34.9512 35.6378 35.7656 36.4523 35.7656 37.4542C35.7598 45.839 28.9395 52.6593 20.5547 52.6593Z" fill="#currentColor" />
+                <path d="M36.6797 56.9718C26.0508 56.9718 17.4082 48.3233 17.4082 37.7003C17.4082 27.5401 34.0137 6.50499 34.7227 5.61436C35.0625 5.18663 35.5723 4.93468 36.1172 4.92882C36.6621 4.92296 37.1777 5.15733 37.5293 5.57335C37.6465 5.70812 40.4004 8.98351 43.7871 13.5773C44.3789 14.3858 44.209 15.5226 43.4004 16.1144C42.5918 16.7062 41.4551 16.5362 40.8633 15.7276C39 13.1964 37.3125 11.0519 36.1816 9.65147C30.9434 16.5421 21.0352 30.9679 21.0352 37.7003C21.0352 46.3253 28.0547 53.3448 36.6797 53.3448C45.3047 53.3448 52.3242 46.3253 52.3242 37.7003C52.3242 35.9601 51.5508 32.5499 47.8477 26.2042C47.3437 25.337 47.6367 24.2296 48.5039 23.7257C49.3711 23.2218 50.4785 23.5148 50.9824 24.3819C54.3281 30.1183 55.9512 34.4718 55.9512 37.7062C55.9512 48.3292 47.3027 56.9718 36.6797 56.9718Z" fill="#currentColor" />
               </svg>
             </div>
             <div className="text">
@@ -83,28 +53,12 @@ export default function TempInfo({ data }) {
             </div>
           </div>
           <div className='item'>
-            <div className='icon'>
-              <svg xmlSpace="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" className="humiditysvg">  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                  AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
-                  e7ZQfLZVf6pRfbfL5fdRfbZIbbZmmcxols5nl85OebSPsteLrdVSfLZxl89ok9FqlM5ahsBdicNa
-                  hsFcicRhjcdWgbpahsFfi8ZbhsFijsmErOWLt+9xndZcicJahsFahsFdicN5n81xjcZqlNRpls1q
-                  lNBfn99pls9nkcxXgrpZgrtik81OebWNsdeMrtZOebRNerVZg7pwmMhNebRKdLRNerZNebHZ8v9o
-                  lM9jj8rV7v3W7v1ch7+Ktu6Lt/CEsep7p+Cz1PO+3fqJte5/q+V+quOUvvLY8f+TvfKpzvapzfaq
-                  z/aRvPGdxfSVv/LX8P/W8P+32fnK5vyMuPCmzPXW8P6ny/WWv/KOufGawvO22PjJ5vzB4PrU7v6i
-                  yPSz1fiYwfKOufDD4funzPXF4vvE4vuOuvHV7/7U7/7G4/uNufCx1Pew0/ev0veu0feQu/G01viP
-                  ufF/q+SCrud+quSItO2kyvWjyfVijslrltFmkcyEqtZgjMf///8NXQssAAAAPHRSTlMAAZgCW+EG
-                  y+jMBxRaRXHC2H8bX0ry/vrhyvnw0PDHR0Be/e/4/f4SDDNiEFVb0eI5iMHCho7NwI0YOBdy59Cm
-                  AAAAAWJLR0SCi7P/RAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+cCEBITAJMBs+kAAAFb
-                  SURBVCjPY2CAAUYmZgY8gIWVBY8sGzsHJxc2CW4eXiDJx28jIAjiCgnzgoV5ebiBpIiomK2duISk
-                  lL2Ng6O0jIwsmCsnIW5nKyYqwiDv5AwELq5uNjY27h6enh5grpcLiHKSZ1BwBgNvH6C0j68zKlCA
-                  SfvZgIA/LukAsHQAVDgwCE06OAQoGxoMlQ4Lj0CVdo6MsomKhrJjfGwi0aSdY+NiYcx4G5sEdGkk
-                  kGhjk4RHOjnEJgWPtLNvKprL07CpgktHpEfgk/a3ycAnnWmThRDMxpDOscmFi6Xl5aNLF+QUwqWL
-                  bIoxogQBSpJskkpwS5cC4yYFp3RZElA6qQwh7VFeAWZXVFYByWpwxNcAueUeQGlFJWUZCZXauloV
-                  CRllVdt6NbB0QyOIq6TIoK4BSrWaWpogSltHVw8srW8A4mqoY6R6QyOgrLEJztxiamZuZsGGOztZ
-                  WlnD2QBCYbJl9Cx9XAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xNlQxODoxOTowMCswMDow
-                  MG/wqfUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDItMTZUMTg6MTk6MDArMDA6MDAerRFJAAAA
-                  KHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAyLTE2VDE4OjE5OjAwKzAwOjAwSbgwlgAAAABJRU5ErkJggg==" y={0} x={0} height={30} width={30} id="image0" />
+            <div className='info-icon'>
+              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M39.4097 17.5C40.783 15.9656 42.7788 15 45 15C49.1423 15 52.5 18.3579 52.5 22.5C52.5 26.6423 49.1423 30 45 30H7.5M21.2732 11.6667C22.1887 10.6437 23.5192 10 25 10C27.7615 10 30 12.2386 30 15C30 17.7614 27.7615 20 25 20H7.5M28.7733 48.3332C29.6888 49.3562 31.0193 50 32.5 50C35.2615 50 37.5 47.7615 37.5 45C37.5 42.2385 35.2615 40 32.5 40H7.5" stroke="currentColor" strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" />
               </svg>
+
+
             </div>
             <div className="text">
               <p>Vento</p>
@@ -114,28 +68,18 @@ export default function TempInfo({ data }) {
         </div>
         <div className="item-column">
           <div className='item'>
-            <div className='icon'>
-              <svg xmlSpace="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" className="humiditysvg">  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                  AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
-                  e7ZQfLZVf6pRfbfL5fdRfbZIbbZmmcxols5nl85OebSPsteLrdVSfLZxl89ok9FqlM5ahsBdicNa
-                  hsFcicRhjcdWgbpahsFfi8ZbhsFijsmErOWLt+9xndZcicJahsFahsFdicN5n81xjcZqlNRpls1q
-                  lNBfn99pls9nkcxXgrpZgrtik81OebWNsdeMrtZOebRNerVZg7pwmMhNebRKdLRNerZNebHZ8v9o
-                  lM9jj8rV7v3W7v1ch7+Ktu6Lt/CEsep7p+Cz1PO+3fqJte5/q+V+quOUvvLY8f+TvfKpzvapzfaq
-                  z/aRvPGdxfSVv/LX8P/W8P+32fnK5vyMuPCmzPXW8P6ny/WWv/KOufGawvO22PjJ5vzB4PrU7v6i
-                  yPSz1fiYwfKOufDD4funzPXF4vvE4vuOuvHV7/7U7/7G4/uNufCx1Pew0/ev0veu0feQu/G01viP
-                  ufF/q+SCrud+quSItO2kyvWjyfVijslrltFmkcyEqtZgjMf///8NXQssAAAAPHRSTlMAAZgCW+EG
-                  y+jMBxRaRXHC2H8bX0ry/vrhyvnw0PDHR0Be/e/4/f4SDDNiEFVb0eI5iMHCho7NwI0YOBdy59Cm
-                  AAAAAWJLR0SCi7P/RAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+cCEBITAJMBs+kAAAFb
-                  SURBVCjPY2CAAUYmZgY8gIWVBY8sGzsHJxc2CW4eXiDJx28jIAjiCgnzgoV5ebiBpIiomK2duISk
-                  lL2Ng6O0jIwsmCsnIW5nKyYqwiDv5AwELq5uNjY27h6enh5grpcLiHKSZ1BwBgNvH6C0j68zKlCA
-                  SfvZgIA/LukAsHQAVDgwCE06OAQoGxoMlQ4Lj0CVdo6MsomKhrJjfGwi0aSdY+NiYcx4G5sEdGkk
-                  kGhjk4RHOjnEJgWPtLNvKprL07CpgktHpEfgk/a3ycAnnWmThRDMxpDOscmFi6Xl5aNLF+QUwqWL
-                  bIoxogQBSpJskkpwS5cC4yYFp3RZElA6qQwh7VFeAWZXVFYByWpwxNcAueUeQGlFJWUZCZXauloV
-                  CRllVdt6NbB0QyOIq6TIoK4BSrWaWpogSltHVw8srW8A4mqoY6R6QyOgrLEJztxiamZuZsGGOztZ
-                  WlnD2QBCYbJl9Cx9XAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xNlQxODoxOTowMCswMDow
-                  MG/wqfUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDItMTZUMTg6MTk6MDArMDA6MDAerRFJAAAA
-                  KHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAyLTE2VDE4OjE5OjAwKzAwOjAwSbgwlgAAAABJRU5ErkJggg==" y={0} x={0} height={30} width={30} id="image0" />
+            <div className='info-icon'>
+              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clipPath="url(#clip0_119_17)">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M56 4L48 3.27405V26.726L56 26C58.208 26 60 24.208 60 22V8C60 5.792 58.208 4 56 4ZM32 28.182L44 27.092V2.91003L32 1.81799V28.182ZM8 4V26C8 28.208 9.792 30 12 30L28 28.5439V1.45605L12 0C9.792 0 8 1.792 8 4ZM2 0C0.894 0 0 0.896 0 2V58C0 59.106 0.894 60 2 60C3.106 60 4 59.106 4 58V2C4 0.896 3.106 0 2 0Z" fill="currentColor" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_119_17">
+                    <rect width={60} height={60} fill="white" />
+                  </clipPath>
+                </defs>
               </svg>
+
             </div>
             <div className="text">
               <p>Rajadas de vento</p>
@@ -143,28 +87,11 @@ export default function TempInfo({ data }) {
             </div>
           </div>
           <div className='item'>
-            <div className='icon'>
-              <svg xmlSpace="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" className="humiditysvg">  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                  AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
-                  e7ZQfLZVf6pRfbfL5fdRfbZIbbZmmcxols5nl85OebSPsteLrdVSfLZxl89ok9FqlM5ahsBdicNa
-                  hsFcicRhjcdWgbpahsFfi8ZbhsFijsmErOWLt+9xndZcicJahsFahsFdicN5n81xjcZqlNRpls1q
-                  lNBfn99pls9nkcxXgrpZgrtik81OebWNsdeMrtZOebRNerVZg7pwmMhNebRKdLRNerZNebHZ8v9o
-                  lM9jj8rV7v3W7v1ch7+Ktu6Lt/CEsep7p+Cz1PO+3fqJte5/q+V+quOUvvLY8f+TvfKpzvapzfaq
-                  z/aRvPGdxfSVv/LX8P/W8P+32fnK5vyMuPCmzPXW8P6ny/WWv/KOufGawvO22PjJ5vzB4PrU7v6i
-                  yPSz1fiYwfKOufDD4funzPXF4vvE4vuOuvHV7/7U7/7G4/uNufCx1Pew0/ev0veu0feQu/G01viP
-                  ufF/q+SCrud+quSItO2kyvWjyfVijslrltFmkcyEqtZgjMf///8NXQssAAAAPHRSTlMAAZgCW+EG
-                  y+jMBxRaRXHC2H8bX0ry/vrhyvnw0PDHR0Be/e/4/f4SDDNiEFVb0eI5iMHCho7NwI0YOBdy59Cm
-                  AAAAAWJLR0SCi7P/RAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+cCEBITAJMBs+kAAAFb
-                  SURBVCjPY2CAAUYmZgY8gIWVBY8sGzsHJxc2CW4eXiDJx28jIAjiCgnzgoV5ebiBpIiomK2duISk
-                  lL2Ng6O0jIwsmCsnIW5nKyYqwiDv5AwELq5uNjY27h6enh5grpcLiHKSZ1BwBgNvH6C0j68zKlCA
-                  SfvZgIA/LukAsHQAVDgwCE06OAQoGxoMlQ4Lj0CVdo6MsomKhrJjfGwi0aSdY+NiYcx4G5sEdGkk
-                  kGhjk4RHOjnEJgWPtLNvKprL07CpgktHpEfgk/a3ycAnnWmThRDMxpDOscmFi6Xl5aNLF+QUwqWL
-                  bIoxogQBSpJskkpwS5cC4yYFp3RZElA6qQwh7VFeAWZXVFYByWpwxNcAueUeQGlFJWUZCZXauloV
-                  CRllVdt6NbB0QyOIq6TIoK4BSrWaWpogSltHVw8srW8A4mqoY6R6QyOgrLEJztxiamZuZsGGOztZ
-                  WlnD2QBCYbJl9Cx9XAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xNlQxODoxOTowMCswMDow
-                  MG/wqfUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDItMTZUMTg6MTk6MDArMDA6MDAerRFJAAAA
-                  KHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAyLTE2VDE4OjE5OjAwKzAwOjAwSbgwlgAAAABJRU5ErkJggg==" y={0} x={0} height={30} width={30} id="image0" />
+            <div className='info-icon'>
+              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M43.2507 16.9275C40.4982 11.3494 34.7681 7.5 28.125 7.5C19.2206 7.5 11.9438 14.4037 11.3119 23.1468C4.76629 25.0124 0 30.7313 0 37.5C0 45.4875 6.6375 52.0406 15 52.5H43.125C52.4363 52.5 60 44.5256 60 34.6875C60 25.2075 52.5919 17.4807 43.2507 16.9275Z" fill="currentColor" />
               </svg>
+
             </div>
             <div className="text">
               <p>Nuvens</p>
@@ -172,28 +99,17 @@ export default function TempInfo({ data }) {
             </div>
           </div>
           <div className='item'>
-            <div className='icon'>
-              <svg xmlSpace="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" className="humiditysvg">  <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                  AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
-                  e7ZQfLZVf6pRfbfL5fdRfbZIbbZmmcxols5nl85OebSPsteLrdVSfLZxl89ok9FqlM5ahsBdicNa
-                  hsFcicRhjcdWgbpahsFfi8ZbhsFijsmErOWLt+9xndZcicJahsFahsFdicN5n81xjcZqlNRpls1q
-                  lNBfn99pls9nkcxXgrpZgrtik81OebWNsdeMrtZOebRNerVZg7pwmMhNebRKdLRNerZNebHZ8v9o
-                  lM9jj8rV7v3W7v1ch7+Ktu6Lt/CEsep7p+Cz1PO+3fqJte5/q+V+quOUvvLY8f+TvfKpzvapzfaq
-                  z/aRvPGdxfSVv/LX8P/W8P+32fnK5vyMuPCmzPXW8P6ny/WWv/KOufGawvO22PjJ5vzB4PrU7v6i
-                  yPSz1fiYwfKOufDD4funzPXF4vvE4vuOuvHV7/7U7/7G4/uNufCx1Pew0/ev0veu0feQu/G01viP
-                  ufF/q+SCrud+quSItO2kyvWjyfVijslrltFmkcyEqtZgjMf///8NXQssAAAAPHRSTlMAAZgCW+EG
-                  y+jMBxRaRXHC2H8bX0ry/vrhyvnw0PDHR0Be/e/4/f4SDDNiEFVb0eI5iMHCho7NwI0YOBdy59Cm
-                  AAAAAWJLR0SCi7P/RAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+cCEBITAJMBs+kAAAFb
-                  SURBVCjPY2CAAUYmZgY8gIWVBY8sGzsHJxc2CW4eXiDJx28jIAjiCgnzgoV5ebiBpIiomK2duISk
-                  lL2Ng6O0jIwsmCsnIW5nKyYqwiDv5AwELq5uNjY27h6enh5grpcLiHKSZ1BwBgNvH6C0j68zKlCA
-                  SfvZgIA/LukAsHQAVDgwCE06OAQoGxoMlQ4Lj0CVdo6MsomKhrJjfGwi0aSdY+NiYcx4G5sEdGkk
-                  kGhjk4RHOjnEJgWPtLNvKprL07CpgktHpEfgk/a3ycAnnWmThRDMxpDOscmFi6Xl5aNLF+QUwqWL
-                  bIoxogQBSpJskkpwS5cC4yYFp3RZElA6qQwh7VFeAWZXVFYByWpwxNcAueUeQGlFJWUZCZXauloV
-                  CRllVdt6NbB0QyOIq6TIoK4BSrWaWpogSltHVw8srW8A4mqoY6R6QyOgrLEJztxiamZuZsGGOztZ
-                  WlnD2QBCYbJl9Cx9XAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMi0xNlQxODoxOTowMCswMDow
-                  MG/wqfUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDItMTZUMTg6MTk6MDArMDA6MDAerRFJAAAA
-                  KHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAyLTE2VDE4OjE5OjAwKzAwOjAwSbgwlgAAAABJRU5ErkJggg==" y={0} x={0} height={30} width={30} id="image0" />
+            <div className='info-icon'>
+              <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M51.7333 43.3235C52.6265 39.9897 52.741 36.4955 52.0678 33.1105C51.3943 29.7255 49.9515 26.541 47.8505 23.8029C45.7495 21.0648 43.0468 18.8468 39.9515 17.3204C36.8563 15.7939 33.4513 15 30 15C26.5488 15 23.1438 15.7939 20.0485 17.3204C16.9532 18.8468 14.2505 21.0648 12.1496 23.8029C10.0486 26.541 8.60563 29.7255 7.93233 33.1105C7.25903 36.4955 7.37343 39.9897 8.26668 43.3235" stroke="currentColor" strokeWidth={5} strokeLinecap="round" />
+                <path d="M31.9141 38.9558C33.1329 40.729 32.2759 43.4345 29.9999 44.9985C27.7241 46.5625 24.8912 46.3928 23.6725 44.6193C22.3737 42.7293 17.8903 32.1023 15.1677 25.5285C14.6549 24.2906 16.1691 23.25 17.1411 24.1725C22.3018 29.0708 30.6154 37.0658 31.9141 38.9558Z" stroke="currentColor" strokeWidth={5} />
+                <path d="M30 15V20" stroke="currentColor" strokeWidth={5} strokeLinecap="round" />
+                <path d="M14.0898 21.5894L17.6254 25.125" stroke="currentColor" strokeWidth={5} strokeLinecap="round" />
+                <path d="M45.9105 21.5894L42.375 25.125" stroke="currentColor" strokeWidth={5} strokeLinecap="round" />
+                <path d="M51.734 43.3228L46.9043 42.0288" stroke="currentColor" strokeWidth={5} strokeLinecap="round" />
+                <path d="M8.26562 43.3228L13.0953 42.0288" stroke="currentColor" strokeWidth={5} strokeLinecap="round" />
               </svg>
+
             </div>
             <div className="text">
               <p>Pressão Atmosférica</p>
