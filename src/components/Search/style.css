@@ -53,6 +53,7 @@
   color: transparent; /* Torna o texto transparente para exibir o background */
   background-image: linear-gradient(to right, var(--foreground), var(--primary)); /* Gradiente de background */
 }
+
  
  .input-container .icon {
   position: absolute;

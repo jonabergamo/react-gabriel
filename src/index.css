@@ -17,6 +17,10 @@ body {
   gap: 25px;
 }
 
+strong {
+  font-weight: 500;
+}
+
 
 
 :root {
